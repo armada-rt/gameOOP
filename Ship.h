@@ -17,13 +17,18 @@ class Ship {
 		Ship(int radius, int x, int y, int aMagSize);
 		// function to draw the ship
 		void draw(sf::RenderWindow* window);
-		// moving ship
+		// moving ship up
 		void move_up(int speed_up);
+		// moving ship down
 		void move_down(int speed_down);
+		// moving ship left
 		void move_left(int speed_left);
+		// moving ship right
 		void move_right(int speed_right);
 		// firing bullets
 		void fire();
+		// reload
+		void reload();
 		~Ship();
 };
 

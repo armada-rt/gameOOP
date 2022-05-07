@@ -61,6 +61,18 @@ void Ship::fire() {
 	}
 }
 
-Ship::~Ship() {
+void Ship::reload() {
+	// iterating over all the bullets
+	for (int i = 0; i < magSize; i++) {
+		// if bullet is fired
+		if (mag[i].isFired()) {
+			// call reload on it
+			mag[i].reload();
+		}
+	}
+}
 
+Ship::~Ship() {
+	delete this->shipBody;
+	delete [] this->mag;
 }

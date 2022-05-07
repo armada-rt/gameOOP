@@ -33,6 +33,11 @@ void Bullet::move() {
 
 bool Bullet::isFired() {return fired;}
 
+void Bullet::reload() {
+	// set fire to false so we can use it through the use() function below
+	fired = false;
+}
+
 void Bullet::use(sf::Vector2f position) {
 	// set position to the position of the player
 	bullet->setPosition(position);
@@ -41,5 +46,5 @@ void Bullet::use(sf::Vector2f position) {
 }
 
 Bullet::~Bullet() {
-
+	delete this->bullet;
 }

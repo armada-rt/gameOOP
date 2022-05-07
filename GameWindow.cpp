@@ -40,8 +40,12 @@ void GameWindow::run() {
 				ship->move_right(5);
 			}
 			// shooting bullet
-			if (e.type == sf::Event::MouseButtonPressed) {
+			if (Mouse::isButtonPressed(Mouse::Left)) {
 				ship->fire();
+			}
+			// reloading
+			if (Mouse::isButtonPressed(Mouse::Right)) {
+				ship->reload();
 			}
 		}
 		// clear
@@ -53,5 +57,6 @@ void GameWindow::run() {
 }
 
 GameWindow::~GameWindow() {
-
+	delete this->ship;
+	delete this->window;
 }
