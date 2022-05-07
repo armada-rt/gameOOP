@@ -1,11 +1,11 @@
 // ASTEROIDS
 #include <SFML/Graphics.hpp>
-#include "asteroids.h"
+#include "GameWindow.h"
 
 
 int main() {
 
-	asteroids g(800,"ASTEROIDS");
+	GameWindow g(800,"ASTEROIDS");
 	g.run();
 
 	return 0;

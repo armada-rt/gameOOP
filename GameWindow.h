@@ -1,24 +1,27 @@
-#ifndef ASTEROIDS_H
-#define ASTEROIDS_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include "Ship.h"
 using namespace sf;
 using namespace std;
 
 // class for the game
-class Asteroids {
+class GameWindow {
 	private:
 		// window for the game as pointer
 		sf::RenderWindow* window;
+		// add ship as data member in class GameWindow
+		Ship* ship;
 	public:
 		// constructor
-		Asteroids(int size, string title);
+		GameWindow(int size, string title);
 		// function to run the loop
 		void run();
 		// destructor
-		~Asteroids();
+		~GameWindow();
 };
 
-#endif // ASTEROIDS_H
+#endif // WINDOW_H
