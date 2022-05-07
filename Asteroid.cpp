@@ -31,6 +31,9 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	if (this->alive) {
 		// offset of x direction every time function is called
 		asteroid->move(-0.01,0);
+		// CHANGE THE ABOVE TO MOVE IN A SING RANDOM DIRECTION
+		// MAYBE USE UNIT CIRCLE AND THE FOLLOWING ANGLES AS DIRECTIONS
+		// 0,15,30,45,60,75,90.... ALL THE WAY TO 360.
 		window->draw(*asteroid);
 		// checking if asteroid goes outside of window
 		if (asteroid->getPosition().x < 0) {
