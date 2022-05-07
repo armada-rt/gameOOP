@@ -20,7 +20,7 @@ class Bullet {
 		void move();
 		// check if bullet is fired
 		bool isFired();
-
+		// reload
 		void reload();
 		// use bullet
 		void use(sf::Vector2f position);
