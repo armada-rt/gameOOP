@@ -5,13 +5,16 @@ using namespace sf;
 using namespace std;
 
 Bullet::Bullet() {
-	// bullet shape made rectangular with length 10 and width 5
-	bullet = new sf::RectangleShape(sf::Vector2f(10,5));
-	// set colour
-	bullet->setFillColor(sf::Color::Red);
-	// set position to initially be offscreen
+	// bullet shape made circular
+	bullet = new sf::CircleShape();
+	radius = 5;
+	bullet->setRadius(radius);
+	// set spawn position, set position to initially be offscreen
 	bullet->setPosition(-1,-1);
-	// for new bullet, initialise fired to false since it hasnt been used yet
+	// set colour of bullet
+	bullet->setFillColor(sf::Color::Red);
+	// set centre of bullet
+	bullet->setOrigin(radius/2, radius/2);
 	fired = false;
 }
 

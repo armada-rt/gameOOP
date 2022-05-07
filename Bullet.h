@@ -5,7 +5,8 @@
 
 class Bullet {
 	private:
-		sf::RectangleShape* bullet;
+		sf::CircleShape* bullet;
+		int radius;
 		// data memeber to tell if bullet is fired or not
 		bool fired;
 	public:
