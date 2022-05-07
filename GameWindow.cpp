@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameWindow.h"
 #include "Ship.h"
+#include "Asteroid.h"
 #include <string>
 using namespace sf;
 using namespace std;
@@ -11,6 +12,8 @@ GameWindow::GameWindow(int size, string title) {
 	window = new sf::RenderWindow(sf::VideoMode(size, size), title);
 	// fill ship pointer with an object
 	ship = new Ship(10,400,400, 10);
+	// having asteroids
+	asteroid = new Asteroid();
 }
 
 // function to run the loop
@@ -47,16 +50,22 @@ void GameWindow::run() {
 			if (Mouse::isButtonPressed(Mouse::Right)) {
 				ship->reload();
 			}
+			// spawn asteroids
+			if (Keyboard::isKeyPressed(Keyboard::P)) {
+				asteroid->spawn(window->getSize().x-10, window->getSize().y);
+			}
 		}
 		// clear
 		window->clear();
 		ship->draw(window);
+		asteroid->draw(window);
 		// display
 		window->display();
 	}
 }
 
 GameWindow::~GameWindow() {
-	delete this->ship;
-	delete this->window;
+	delete ship;
+	delete window;
+	delete asteroid;
 }

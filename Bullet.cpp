@@ -7,7 +7,7 @@ using namespace std;
 Bullet::Bullet() {
 	// bullet shape made circular
 	bullet = new sf::CircleShape();
-	radius = 5;
+	radius = 2.5;
 	bullet->setRadius(radius);
 	// set spawn position, set position to initially be offscreen
 	bullet->setPosition(-1,-1);

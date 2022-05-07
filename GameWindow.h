@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "Ship.h"
+#include "Asteroid.h"
 using namespace sf;
 using namespace std;
 
@@ -15,6 +16,8 @@ class GameWindow {
 		sf::RenderWindow* window;
 		// add ship as data member in class GameWindow
 		Ship* ship;
+		// add asteroid as data member in class GameWindow
+		Asteroid* asteroid;
 	public:
 		// constructor
 		GameWindow(int size, string title);
