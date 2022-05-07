@@ -32,6 +32,11 @@ void Asteroid::draw(sf::RenderWindow* window) {
 		// offset of x direction every time function is called
 		asteroid->move(-0.01,0);
 		window->draw(*asteroid);
+		// checking if asteroid goes outside of window
+		if (asteroid->getPosition().x < 0) {
+			// respawn at another random position
+			this->spawn(window->getSize().x-10, window->getSize().y);
+		}
 	}
 }
 

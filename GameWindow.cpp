@@ -7,13 +7,15 @@ using namespace sf;
 using namespace std;
 
 
-GameWindow::GameWindow(int size, string title) {
+GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	// create an object of RenderWindow and put its address in the variable/data member
 	window = new sf::RenderWindow(sf::VideoMode(size, size), title);
 	// fill ship pointer with an object
-	ship = new Ship(10,400,400, 10);
+	ship = new Ship(10,400,400, magSize);
 	// having asteroids
-	asteroid = new Asteroid();
+	asteroid = new Asteroid[numAsteroids];
+	this->_numAsteroids = numAsteroids;
+	this->_magSize = magSize;
 }
 
 // function to run the loop
@@ -52,13 +54,17 @@ void GameWindow::run() {
 			}
 			// spawn asteroids
 			if (Keyboard::isKeyPressed(Keyboard::P)) {
-				asteroid->spawn(window->getSize().x-10, window->getSize().y);
+				for (int i = 0; i < _numAsteroids; i++) {
+					asteroid[i].spawn(window->getSize().x-10, window->getSize().y);
+				}
 			}
 		}
 		// clear
 		window->clear();
 		ship->draw(window);
-		asteroid->draw(window);
+		for (int i = 0; i < _numAsteroids; i++) {
+			asteroid[i].draw(window);
+		}
 		// display
 		window->display();
 	}

@@ -18,9 +18,11 @@ class GameWindow {
 		Ship* ship;
 		// add asteroid as data member in class GameWindow
 		Asteroid* asteroid;
+		int _magSize;
+		int _numAsteroids;
 	public:
 		// constructor
-		GameWindow(int size, string title);
+		GameWindow(int size, string title, int magSize, int numAsteroids);
 		// function to run the loop
 		void run();
 		// destructor
