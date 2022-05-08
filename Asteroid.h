@@ -14,6 +14,7 @@ class Asteroid {
 		sf::CircleShape* asteroid;
 		// want to know if asteroid is "dead" or "alive"
 		bool alive;
+		int directionChoice;
 		int radius;
 	public:
 		// constructor
