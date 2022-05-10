@@ -5,7 +5,7 @@
 
 int main() {
 
-	GameWindow g(800,"ASTEROIDS", 10, 1);
+	GameWindow g(800,"ASTEROIDS", 10, 5);
 	g.run();
 
 	return 0;

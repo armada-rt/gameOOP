@@ -34,13 +34,16 @@ void GameWindow::run() {
 			if (Keyboard::isKeyPressed(Keyboard::W)) {
 				// move up
 				ship->move_up(5);
-			} else if (Keyboard::isKeyPressed(Keyboard::S)) {
+			}
+			if (Keyboard::isKeyPressed(Keyboard::S)) {
 				// move down
 				ship->move_down(5);
-			} else if (Keyboard::isKeyPressed(Keyboard::A)) {
+			}
+			if (Keyboard::isKeyPressed(Keyboard::A)) {
 				// move left
 				ship->move_left(5);
-			} else if (Keyboard::isKeyPressed(Keyboard::D)) {
+			}
+			if (Keyboard::isKeyPressed(Keyboard::D)) {
 				// move right
 				ship->move_right(5);
 			}
@@ -55,7 +58,7 @@ void GameWindow::run() {
 			// spawn asteroids
 			if (Keyboard::isKeyPressed(Keyboard::P)) {
 				for (int i = 0; i < _numAsteroids; i++) {
-					asteroid[i].spawn(window->getSize().x-10, window->getSize().y);
+					asteroid[i].spawn(window->getSize().x, window->getSize().y);
 				}
 			}
 		}

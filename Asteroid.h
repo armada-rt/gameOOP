@@ -14,11 +14,17 @@ class Asteroid {
 		sf::CircleShape* asteroid;
 		// want to know if asteroid is "dead" or "alive"
 		bool alive;
-		int directionChoice;
+		float angle;
+		float cosine_angle;
+		float sine_angle;
+		float x_spawn_coord;
+		float y_spawn_coord;
+		int axes_spawn_choice;
 		int radius;
 	public:
 		// constructor
 		Asteroid();
+		void direction();
 		// spawn asteroid
 		void spawn(int x, int y);
 		// draw/spawns asteroids

@@ -20,139 +20,70 @@ Asteroid::Asteroid() {
 	srand(time(0));
 }
 
+void Asteroid::direction() {
+	// generate number betweeen 0 and 1 and multiply by 2Pi
+	angle = 2*M_PI * ((float) rand() / RAND_MAX);
+	cosine_angle = cos(angle);
+	sine_angle = sin(angle);
+}
+
 void Asteroid::spawn(int x, int y) {
-	int rand_x = rand() % x + 1;
-	int rand_y = rand() % y + 1;
-	asteroid->setPosition(rand_x, rand_y);
-	directionChoice = rand() % 23 + 1;
+	direction();
+	// random number chosen. 0 or 1
+	axes_spawn_choice = rand() % 2;
+	switch (axes_spawn_choice) {
+		case 0:
+			x_spawn_coord = (float)rand() / x + 1;
+			y_spawn_coord = 0;
+			cout << "x axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
+			// spawn on x-axis
+			asteroid->setPosition(x_spawn_coord, y_spawn_coord);
+			// std::cout << "spawned @ (" << rand_x << "," << axis << ")" << std::endl;
+		break;
+		case 1:
+			y_spawn_coord = (float)rand() / y + 1;
+			x_spawn_coord = 0;
+			cout << "y axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
+			// spawn on y-axis
+			asteroid->setPosition(x_spawn_coord, y_spawn_coord);
+			// std::cout << "spawned @ (" << axis << "," << rand_y << ")" << std::endl;
+		break;
+	}
 	alive = true;
 }
 
 void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
-		// int directionChoice;
-		// directionChoice = rand() % 23 + 1;
-		std::cout << "case: " << directionChoice << std::endl;
-		switch (directionChoice) {
-			// offsets of x and y directions every time function is called
-			// should be chosen at random
-			case 0: /* 0 deg */
-				asteroid->move(0.1, 0);
-				window->draw(*asteroid);
-				break;
-			case 1: /* 15 deg */
-				asteroid->move(0.0966, 0.0259);
-				window->draw(*asteroid);
-				break;
-			case 2: /* 30 deg */
-				asteroid->move(0.0866, 0.0500);
-				window->draw(*asteroid);
-				break;
-			case 3: /* 45 deg */
-				asteroid->move(0.0707, 0.0707);
-				window->draw(*asteroid);
-				break;
-			case 4: /* 60 deg */
-				asteroid->move(0.0500, 0.0866);
-				window->draw(*asteroid);
-				break;
-			case 5: /* 75 deg */
-				asteroid->move(0.0259, 0.0966);
-				window->draw(*asteroid);
-				break;
-			case 6: /* 90 deg */
-				asteroid->move(0, 0.1);
-				window->draw(*asteroid);
-				break;
-			case 7: /* 105 deg */
-				asteroid->move(-0.0259, 0.0966);
-				window->draw(*asteroid);
-				break;
-			case 8: /* 120 deg */
-				asteroid->move(-0.0500, 0.0866);
-				window->draw(*asteroid);
-				break;
-			case 9: /* 135 deg */
-				asteroid->move(-0.0707, 0.0707);
-				window->draw(*asteroid);
-				break;
-			case 10: /* 150 deg */
-				asteroid->move(-0.0866, 0.0500);
-				window->draw(*asteroid);
-				break;
-			case 11: /* 165 deg */
-				asteroid->move(-0.0966, 0.0259);
-				window->draw(*asteroid);
-				break;
-			case 12: /* 180 deg */
-				asteroid->move(-0.1, 0);
-				window->draw(*asteroid);
-				break;
-			case 13: /* 195 deg */
-				asteroid->move(-0.0966, -0.0259);
-				window->draw(*asteroid);
-				break;
-			case 14: /* 210 deg */
-				asteroid->move(-0.0866, -0.0500);
-				window->draw(*asteroid);
-				break;
-			case 15: /* 225 deg */
-				asteroid->move(-0.0707, -0.0707);
-				window->draw(*asteroid);
-				break;
-			case 16: /* 240 deg */
-				asteroid->move(-0.0500, -0.0866);
-				window->draw(*asteroid);
-				break;
-			case 17: /* 255 deg */
-				asteroid->move(-0.0259, -0.0966);
-				window->draw(*asteroid);
-				break;
-			case 18: /* 270 deg */
-				asteroid->move(0, -0.1);
-				window->draw(*asteroid);
-				break;
-			case 19: /* 285 deg */
-				asteroid->move(0.0259, -0.0966);
-				window->draw(*asteroid);
-				break;
-			case 20: /* 300 deg */
-				asteroid->move(0.0500, -0.0866);
-				window->draw(*asteroid);
-				break;
-			case 21: /* 315 deg */
-				asteroid->move(0.0707, -0.0707);
-				window->draw(*asteroid);
-				break;
-			case 22: /* 330 deg */
-				asteroid->move(0.0866, -0.0500);
-				window->draw(*asteroid);
-				break;
-			case 23: /* 345 deg */
-				asteroid->move(0.0966, -0.0259);
-				window->draw(*asteroid);
-				break;
-			// default:
-			// 	break;
-		}
-		// offset of x direction every time function is called
-		// asteroid->move(-0.01, 0.01);
-		// CHANGE THE ABOVE TO MOVE IN A SING RANDOM DIRECTION
-		// MAYBE USE UNIT CIRCLE AND THE FOLLOWING ANGLES AS DIRECTIONS
-		// 0,15,30,45,60,75,90.... ALL THE WAY TO 360.
-		// window->draw(*asteroid);
-		// checking if asteroid goes outside of window
-		if (asteroid->getPosition().x < 0) {
-			// respawn at another random position
-			this->spawn(window->getSize().x, window->getSize().y);
-		} else if (asteroid->getPosition().x > 800) {
-			this->spawn(window->getSize().x, window->getSize().y);
-		} else if (asteroid->getPosition().y > 800) {
-			this->spawn(window->getSize().x, window->getSize().y);
-		} else if (asteroid->getPosition().y < 0) {
-			this->spawn(window->getSize().x, window->getSize().y);
-		}
+		asteroid->move(cosine_angle/20, sine_angle/20);
+		window->draw(*asteroid);
+	
+		// window wrapping
+		float ox;
+		float oy;
+		ox = asteroid->getPosition().x;
+		oy = asteroid->getPosition().y;
+		if (asteroid->getPosition().x < 0.0f) {ox = asteroid->getPosition().x + (float)(window->getSize().x);}
+		if (asteroid->getPosition().x >= (float)window->getSize().x) {ox = asteroid->getPosition().x - (float)(window->getSize().x);}
+		if (asteroid->getPosition().y < 0.0f) {oy = asteroid->getPosition().y + (float)(window->getSize().y);}
+		if (asteroid->getPosition().y >= (float)window->getSize().y) {oy = asteroid->getPosition().y - (float)(window->getSize().y);}
+
+		asteroid->setPosition(ox,oy);
+
+		// ox = ix;
+		// oy = iy;
+		// if (ix < 0.0f) {
+		// 	ox = ix + (float)(window->getSize().x);
+		// }
+		// if (ix >= (float)window->getSize().x) {
+		// 	ox = ix - (float)(window->getSize().x);
+		// }
+		// if (iy < 0.0f) {
+		// 	oy = iy + (float)(window->getSize().y);
+		// }
+		// if (iy >= (float)window->getSize().y) {
+		// 	oy = iy - (float)(window->getSize().y);
+		// }
 	}
 }
 
