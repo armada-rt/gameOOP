@@ -28,15 +28,15 @@ void Asteroid::direction() {
 	sine_angle = sin(angle);
 }
 
-void Asteroid::spawn(int x, int y) {
+void Asteroid::spawn(sf::RenderWindow* window) {
 	direction();
 	// random number chosen. 0 or 1. For switch statement below
 	axes_spawn_choice = rand() % 2;
 	switch (axes_spawn_choice) {
 		// case 0: spawns on the x-axis
 		case 0:
-			// randomise x-coord between 0 and window size
-			x_spawn_coord = (float)rand() / (float)(RAND_MAX/x);
+			// randomise x-coord between 0 and window size (see main.cpp for window size but it should be 800)
+			x_spawn_coord = (float)rand() / (float)(RAND_MAX/(window->getSize().x));
 			// set y to 0 since x-axis spawn
 			y_spawn_coord = 0;
 			// cout << "x axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
@@ -46,8 +46,8 @@ void Asteroid::spawn(int x, int y) {
 		break;
 		// case 1: spawns on the y-axis
 		case 1:
-			// randomise y-coord between 0 and window size
-			y_spawn_coord = (float)rand() / (float)(RAND_MAX/y);
+			// randomise y-coord between 0 and window size (see main.cpp for window size but it should be 800)
+			y_spawn_coord = (float)rand() / (float)(RAND_MAX/(window->getSize().x));
 			// set x to 0 since y-axis spawn
 			x_spawn_coord = 0;
 			// cout << "y axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;

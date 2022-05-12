@@ -26,7 +26,7 @@ class Asteroid {
 		Asteroid();
 		void direction();
 		// spawn asteroid
-		void spawn(int x, int y);
+		void spawn(sf::RenderWindow* window);
 		// draw/spawns asteroids
 		void draw(sf::RenderWindow* window);
 		~Asteroid();

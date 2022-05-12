@@ -76,7 +76,7 @@ void GameWindow::run() {
 			// spawn asteroids
 			if (Keyboard::isKeyPressed(Keyboard::P)) {
 				for (int i = 0; i < _numAsteroids; i++) {
-					asteroid[i].spawn(window->getSize().x, window->getSize().y);
+					asteroid[i].spawn(window);
 				}
 			}
 		}
