@@ -36,7 +36,7 @@ void Asteroid::spawn(int x, int y) {
 		// case 0: spawns on the x-axis
 		case 0:
 			// randomise x-coord between 0 and window size
-			x_spawn_coord = (float)rand() / (float)(RAND_MAX/800);
+			x_spawn_coord = (float)rand() / (float)(RAND_MAX/x);
 			// set y to 0 since x-axis spawn
 			y_spawn_coord = 0;
 			// cout << "x axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
@@ -47,7 +47,7 @@ void Asteroid::spawn(int x, int y) {
 		// case 1: spawns on the y-axis
 		case 1:
 			// randomise y-coord between 0 and window size
-			y_spawn_coord = (float)rand() / (float)(RAND_MAX/800);
+			y_spawn_coord = (float)rand() / (float)(RAND_MAX/y);
 			// set x to 0 since y-axis spawn
 			x_spawn_coord = 0;
 			// cout << "y axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
@@ -95,3 +95,6 @@ void Asteroid::draw(sf::RenderWindow* window) {
 Asteroid::~Asteroid() {
 	
 }
+
+
+/* CHANGE SCORE TO LIVES A */
