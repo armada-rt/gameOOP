@@ -20,7 +20,7 @@ class GameWindow {
 		Asteroid* asteroid;
 		int _magSize;
 		int _numAsteroids;
-		int _score;
+		int _lives;
 		sf::Text info;
 		sf::Font font;
 	public:
