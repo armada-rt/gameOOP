@@ -20,9 +20,13 @@ class GameWindow {
 		Asteroid* asteroid;
 		int _magSize;
 		int _numAsteroids;
+		int _score;
+		sf::Text info;
+		sf::Font font;
 	public:
 		// constructor
 		GameWindow(int size, string title, int magSize, int numAsteroids);
+		void draw_frame();
 		// function to run the loop
 		void run();
 		// destructor

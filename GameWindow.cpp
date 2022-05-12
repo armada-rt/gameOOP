@@ -16,6 +16,24 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	asteroid = new Asteroid[numAsteroids];
 	this->_numAsteroids = numAsteroids;
 	this->_magSize = magSize;
+	// for score
+	_score = 10;
+	if (!font.loadFromFile("./font01.ttf")) {
+		std::cout << "Font not found\n";
+		exit(0);
+	}
+	info.setFont(font);
+	info.setFillColor(sf::Color::Red);
+	info.setCharacterSize(25);
+}
+
+void GameWindow::draw_frame() {
+		// for instance, you could have a function that handles the
+		// printing on the frame
+		std::string msg;
+		msg = "Score: " + std::to_string(_score) + " ";
+		info.setString(msg);
+		window->draw(info);
 }
 
 // function to run the loop
@@ -68,6 +86,7 @@ void GameWindow::run() {
 		for (int i = 0; i < _numAsteroids; i++) {
 			asteroid[i].draw(window);
 		}
+		draw_frame();
 		// display
 		window->display();
 	}
