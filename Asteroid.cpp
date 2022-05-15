@@ -77,13 +77,13 @@ void Asteroid::draw(sf::RenderWindow* window) {
 		new_y = asteroid->getPosition().y;
 		// if x-coord < 0, set the new x-coord ox to current x-coord + window size
 		// i.e. moves from left side of window to right side of window
-		if (asteroid->getPosition().x < 0.0f) {new_x = asteroid->getPosition().x + (float)(window->getSize().x);}
+		if (asteroid->getPosition().x <= 0.0f) {new_x = asteroid->getPosition().x + (float)(window->getSize().x);}
 		// if x-coord >= size of window, set the new x-coord ox to the current x-coord - window size
 		// i.e. move from right side of window to left side of window
 		if (asteroid->getPosition().x >= (float)window->getSize().x) {new_x = asteroid->getPosition().x - (float)(window->getSize().x);}
 		// if y-coord < 0, set the new y-coord oy to current y-coord + window size
 		// i.e. move from top of window to bottom of window
-		if (asteroid->getPosition().y < 0.0f) {new_y = asteroid->getPosition().y + (float)(window->getSize().y);}
+		if (asteroid->getPosition().y <= 0.0f) {new_y = asteroid->getPosition().y + (float)(window->getSize().y);}
 		// if y-coord is >= window size, set the new y-coord oy to the current y-coord - window size
 		// i.e move from bottom of window to top of window
 		if (asteroid->getPosition().y >= (float)window->getSize().y) {new_y = asteroid->getPosition().y - (float)(window->getSize().y);}
