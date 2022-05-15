@@ -16,7 +16,7 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	asteroid = new Asteroid[numAsteroids];
 	this->_numAsteroids = numAsteroids;
 	this->_magSize = magSize;
-	// for score
+	// for lives
 	_lives = 3;
 	if (!font.loadFromFile("./font01.ttf")) {
 		std::cout << "Font not found\n";
@@ -51,19 +51,19 @@ void GameWindow::run() {
 			// moving the ship:
 			if (Keyboard::isKeyPressed(Keyboard::W)) {
 				// move up
-				ship->move_up(5);
+				ship->move_up();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::S)) {
 				// move down
-				ship->move_down(5);
+				ship->move_down();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::A)) {
 				// move left
-				ship->move_left(5);
+				ship->move_left();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D)) {
 				// move right
-				ship->move_right(5);
+				ship->move_right();
 			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {

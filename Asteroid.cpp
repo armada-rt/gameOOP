@@ -68,27 +68,27 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	
 		// WINDOW WRAPPING
 		// new x-coord (output x)
-		float ox;
+		float new_x;
 		// new y-coord (output y)
-		float oy;
+		float new_y;
 		// set output x to current x position
-		ox = asteroid->getPosition().x;
+		new_x = asteroid->getPosition().x;
 		// set output y to current y position
-		oy = asteroid->getPosition().y;
+		new_y = asteroid->getPosition().y;
 		// if x-coord < 0, set the new x-coord ox to current x-coord + window size
 		// i.e. moves from left side of window to right side of window
-		if (asteroid->getPosition().x < 0.0f) {ox = asteroid->getPosition().x + (float)(window->getSize().x);}
+		if (asteroid->getPosition().x < 0.0f) {new_x = asteroid->getPosition().x + (float)(window->getSize().x);}
 		// if x-coord >= size of window, set the new x-coord ox to the current x-coord - window size
 		// i.e. move from right side of window to left side of window
-		if (asteroid->getPosition().x >= (float)window->getSize().x) {ox = asteroid->getPosition().x - (float)(window->getSize().x);}
+		if (asteroid->getPosition().x >= (float)window->getSize().x) {new_x = asteroid->getPosition().x - (float)(window->getSize().x);}
 		// if y-coord < 0, set the new y-coord oy to current y-coord + window size
 		// i.e. move from top of window to bottom of window
-		if (asteroid->getPosition().y < 0.0f) {oy = asteroid->getPosition().y + (float)(window->getSize().y);}
+		if (asteroid->getPosition().y < 0.0f) {new_y = asteroid->getPosition().y + (float)(window->getSize().y);}
 		// if y-coord is >= window size, set the new y-coord oy to the current y-coord - window size
 		// i.e move from bottom of window to top of window
-		if (asteroid->getPosition().y >= (float)window->getSize().y) {oy = asteroid->getPosition().y - (float)(window->getSize().y);}
+		if (asteroid->getPosition().y >= (float)window->getSize().y) {new_y = asteroid->getPosition().y - (float)(window->getSize().y);}
 		// give the new ox and oy to the asteroid position
-		asteroid->setPosition(ox,oy);
+		asteroid->setPosition(new_x,new_y);
 	}
 }
 
@@ -97,4 +97,5 @@ Asteroid::~Asteroid() {
 }
 
 
-/* CHANGE SCORE TO LIVES A */
+/* CHANGE SCORE TO LIVES. WHEN SHIP IS HIT BY ANYTHING, THE LIVES GOES DOWN BY 1 AND THE GAME STOPS. PRESS KEY TO RESPAWN ASTEROIDS
+AND START GAMING AGAIN. WHEN LIVES == 0, GAME OVER, CLOSE WINDOW. */

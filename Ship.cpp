@@ -18,6 +18,8 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	magSize = aMagSize;
 	// make array of bullets
 	mag = new Bullet[10];
+	// setting travel speed
+	speed = 4;
 }
 
 void Ship::draw(sf::RenderWindow* window) {
@@ -31,24 +33,24 @@ void Ship::draw(sf::RenderWindow* window) {
 	}
 }
 
-void Ship::move_up(int speed_up) {
+void Ship::move_up() {
 	// positive y is down therefore make speed -ve to move up
-	shipBody->move(0, -speed_up);
+	shipBody->move(0, -speed);
 }
 
-void Ship::move_down(int speed_down) {
+void Ship::move_down() {
 	// positive y is down therefore make speed +ve to move down
-	shipBody->move(0, speed_down);
+	shipBody->move(0, speed);
 }
 
-void Ship::move_left(int speed_left) {
+void Ship::move_left() {
 	// positive x is right therefore make speed -ve to move left
-	shipBody->move(-speed_left, 0);
+	shipBody->move(-speed, 0);
 }
 
-void Ship::move_right(int speed_right) {
+void Ship::move_right() {
 	// positive x is right therefore make speed +ve to move right
- 	shipBody->move(speed_right, 0);
+ 	shipBody->move(speed, 0);
 }
 
 void Ship::fire() {
