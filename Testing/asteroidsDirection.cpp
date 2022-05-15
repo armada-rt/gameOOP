@@ -7,6 +7,7 @@ using namespace std;
 int main() {
 
 	srand(time(0));
+	
 	float angle;
 		angle = 2*M_PI * ((float) rand() / RAND_MAX);
 		cout << "angle: " << angle << endl;
