@@ -24,9 +24,13 @@ void Asteroid::direction() {
 	// generate number betweeen 0 and 1 and multiply by 2Pi
 	angle = 2*M_PI * ((float) rand() / RAND_MAX);
 	// get values of cosine and sine
-	cosine_angle = cos(angle);
-	sine_angle = sin(angle);
+	// cosine_angle = cos(angle);
+	// sine_angle = sin(angle);
 }
+
+bool Asteroid::is_Alive() {return alive;}
+
+void Asteroid::die() {alive = false;}
 
 void Asteroid::spawn(sf::RenderWindow* window) {
 	direction();
@@ -63,7 +67,8 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
 		// setting 
-		asteroid->move(cosine_angle/20, sine_angle/20);
+		// asteroid->move(cosine_angle/20, sine_angle/20);
+		asteroid->move(cos(angle)/20, sin(angle)/20);
 		window->draw(*asteroid);
 	
 		// WINDOW WRAPPING
@@ -91,6 +96,12 @@ void Asteroid::draw(sf::RenderWindow* window) {
 		asteroid->setPosition(new_x,new_y);
 	}
 }
+
+int Asteroid::get_radius() {return radius;}
+
+int Asteroid::get_current_x() {return asteroid->getPosition().x;}
+
+int Asteroid::get_current_y() {return asteroid->getPosition().y;}
 
 Asteroid::~Asteroid() {
 	

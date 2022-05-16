@@ -2,6 +2,7 @@
 #include "GameWindow.h"
 #include "Ship.h"
 #include "Asteroid.h"
+#include "Collision.h"
 #include <string>
 using namespace sf;
 using namespace std;
@@ -34,6 +35,17 @@ void GameWindow::draw_frame() {
 		msg = "LIVES: " + std::to_string(_lives) + " ";
 		info.setString(msg);
 		window->draw(info);
+}
+
+void GameWindow::check_lives() {
+	// COLLISION CHECK BETWEEN SHIP & ASTEROID
+	for (int i = 0; i < _numAsteroids; i++) {
+		if (asteroid[i].)
+			if (collisionDetect(ship->get_radius(),ship->get_current_x(),ship->get_current_y(),asteroid[i].get_radius(),asteroid[i].get_current_x(),asteroid[i].get_current_y()) == true) {
+				_lives--;
+				asteroid[i].spawn(window);
+			}
+	}
 }
 
 // function to run the loop

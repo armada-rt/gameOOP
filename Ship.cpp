@@ -20,6 +20,7 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	mag = new Bullet[magSize];
 	// setting travel speed
 	speed = 4;
+	_radius = radius;
 }
 
 void Ship::draw(sf::RenderWindow* window) {
@@ -97,6 +98,12 @@ void Ship::reload() {
 		}
 	}
 }
+
+int Ship::get_radius() {return _radius;}
+
+int Ship::get_current_x() {return shipBody->getPosition().x;}
+
+int Ship::get_current_y() {return shipBody->getPosition().y;}
 
 Ship::~Ship() {
 	delete this->shipBody;

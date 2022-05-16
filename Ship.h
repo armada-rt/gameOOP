@@ -13,6 +13,7 @@ class Ship {
 		Bullet* mag;
 		int magSize;
 		int speed;
+		int _radius;
 	public:
 		// constructor: builds the ship
 		Ship(int radius, int x, int y, int aMagSize);
@@ -30,6 +31,12 @@ class Ship {
 		void fire();
 		// reload
 		void reload();
+		// get radius
+		int get_radius();
+		// get current x coord
+		int get_current_x();
+		// get current y coord
+		int get_current_y();
 		~Ship();
 };
 
