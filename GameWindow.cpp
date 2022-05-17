@@ -37,16 +37,16 @@ void GameWindow::draw_frame() {
 		window->draw(info);
 }
 
-void GameWindow::check_lives() {
-	// COLLISION CHECK BETWEEN SHIP & ASTEROID
-	for (int i = 0; i < _numAsteroids; i++) {
-		if (asteroid[i].)
-			if (collisionDetect(ship->get_radius(),ship->get_current_x(),ship->get_current_y(),asteroid[i].get_radius(),asteroid[i].get_current_x(),asteroid[i].get_current_y()) == true) {
-				_lives--;
-				asteroid[i].spawn(window);
-			}
-	}
-}
+// void GameWindow::check_lives() {
+// 	// COLLISION CHECK BETWEEN SHIP & ASTEROID
+// 	for (int i = 0; i < _numAsteroids; i++) {
+// 		if (asteroid[i].)
+// 			if (collisionDetect(ship->get_radius(),ship->get_current_x(),ship->get_current_y(),asteroid[i].get_radius(),asteroid[i].get_current_x(),asteroid[i].get_current_y()) == true) {
+// 				_lives--;
+// 				asteroid[i].spawn(window);
+// 			}
+// 	}
+// }
 
 // function to run the loop
 void GameWindow::run() {
