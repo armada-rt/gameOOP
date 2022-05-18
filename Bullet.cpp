@@ -27,6 +27,7 @@ void Bullet::setPosition(sf::Vector2f position) {
 }
 
 void Bullet::move() {
+	// get position of mouse
 	// offsets x value by 0.5 every time the function is called
 	bullet->move(0.20,0);
 }

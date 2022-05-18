@@ -19,7 +19,7 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// make array of bullets
 	mag = new Bullet[magSize];
 	// setting travel speed
-	speed = 4;
+	speed = 1;
 	_radius = radius;
 }
 
