@@ -2,16 +2,12 @@
 #define WINDOW_H
 
 #include <SFML/Graphics.hpp>
-#include <string>
-#include <iostream>
 #include "Ship.h"
 #include "Asteroid.h"
-#include "Collision.h"
 using namespace sf;
-using namespace std;
 
 // class for the game
-class GameWindow : public Collision {
+class GameWindow {
 	private:
 		// window for the game as pointer
 		sf::RenderWindow* window;
@@ -19,9 +15,13 @@ class GameWindow : public Collision {
 		Ship* ship;
 		// add asteroid as data member in class GameWindow
 		Asteroid* asteroid;
+		// mag size
 		int _magSize;
+		// number of asteroids
 		int _numAsteroids;
-		int _lives;
+		// number of lives
+		float _lives;
+		// things for text for live count
 		sf::Text info;
 		sf::Font font;
 	public:

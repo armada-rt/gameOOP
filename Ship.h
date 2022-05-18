@@ -3,17 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
+#include "CommonFunctions.h"
 
-// note: when I write ship, it means shape, also means body, and vice versa.
-
-class Ship {
+class Ship : public CommonFunctions {
 	private:
-		sf::CircleShape* shipBody;
+		// sf::CircleShape* shipBody;
 		// array of bullets
 		Bullet* mag;
 		int magSize;
 		int speed;
-		int _radius;
 	public:
 		// constructor: builds the ship
 		Ship(int radius, int x, int y, int aMagSize);
@@ -31,12 +29,8 @@ class Ship {
 		void fire();
 		// reload
 		void reload();
-		// get radius
-		int get_radius();
-		// get current x coord
-		int get_current_x();
-		// get current y coord
-		int get_current_y();
+		// collision
+		bool collision(int target_x, int target_y, int target_radius);
 		~Ship();
 };
 

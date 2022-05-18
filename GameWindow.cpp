@@ -2,10 +2,10 @@
 #include "GameWindow.h"
 #include "Ship.h"
 #include "Asteroid.h"
-#include "Collision.h"
+#include "CommonFunctions.h"
 #include <string>
+#include <iostream>
 using namespace sf;
-using namespace std;
 
 
 GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
@@ -18,7 +18,8 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	this->_numAsteroids = numAsteroids;
 	this->_magSize = magSize;
 	// for lives
-	_lives = 3;
+	_lives = 3.0;
+	// having text for live count
 	if (!font.loadFromFile("./font01.ttf")) {
 		std::cout << "Font not found\n";
 		exit(0);
@@ -29,24 +30,43 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 }
 
 void GameWindow::draw_frame() {
-		// for instance, you could have a function that handles the
-		// printing on the frame
-		std::string msg;
-		msg = "LIVES: " + std::to_string(_lives) + " ";
-		info.setString(msg);
-		window->draw(info);
+	// draw ship
+	ship->draw(window);
+	// draw asteroids
+	for (int i = 0; i < _numAsteroids; i++) {
+		asteroid[i].draw(window);
+	}
+	// live count
+	std::string msg;
+	msg = "LIVES: " + std::to_string(_lives) + " ";
+	info.setString(msg);
+	window->draw(info);
 }
 
-// void GameWindow::check_lives() {
-// 	// COLLISION CHECK BETWEEN SHIP & ASTEROID
-// 	for (int i = 0; i < _numAsteroids; i++) {
-// 		if (asteroid[i].)
-// 			if (collisionDetect(ship->get_radius(),ship->get_current_x(),ship->get_current_y(),asteroid[i].get_radius(),asteroid[i].get_current_x(),asteroid[i].get_current_y()) == true) {
-// 				_lives--;
-// 				asteroid[i].spawn(window);
-// 			}
-// 	}
-// }
+void GameWindow::check_lives() {
+	// COLLISION CHECK BETWEEN SHIP & ASTEROID
+	for (int i = 0; i < _numAsteroids; i++) {
+		// as long as the asteroid is "alive"
+		if (asteroid[i].is_Alive()){
+			// if ship collides with asteroid
+			if (asteroid[i].collision(ship->get_current_x(), ship->get_current_y(), ship->get_radius())) {
+				// if asteroid collides with the ship, decrease lives by 1
+				_lives--;
+				// "kill"/destroy the asteroid ...
+				asteroid[i].die();
+				// ... and  respawn
+				asteroid[i].spawn(window);
+			}
+			// if asteroid collides with ship
+			if (ship->collision(asteroid[i].get_current_x(), asteroid[i].get_current_y(), asteroid[i].get_radius())) {
+				// if ship bullet hits asteroid, increase lives by 0.2 lives and ...
+				_lives = _lives + 0.2;
+				// ... "kill"/destroy the asteroid
+				asteroid[i].die();
+			}
+		}
+	}
+}
 
 // function to run the loop
 void GameWindow::run() {
@@ -94,9 +114,10 @@ void GameWindow::run() {
 		}
 		// clear
 		window->clear();
-		ship->draw(window);
-		for (int i = 0; i < _numAsteroids; i++) {
-			asteroid[i].draw(window);
+		check_lives();
+		// if lives is <= 0 close game
+		if (_lives <= 0) {
+			break;
 		}
 		draw_frame();
 		// display
@@ -107,5 +128,5 @@ void GameWindow::run() {
 GameWindow::~GameWindow() {
 	delete ship;
 	delete window;
-	delete asteroid;
+	delete [] asteroid;
 }

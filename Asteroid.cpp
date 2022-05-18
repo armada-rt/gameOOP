@@ -1,19 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include "Asteroid.h"
+#include "CommonFunctions.h"
 #include <random>
 #include <time.h>
-#include <iostream>
 
 Asteroid::Asteroid() {
-	asteroid = new sf::CircleShape();
+	body = new sf::CircleShape();
 	radius = 6;
-	asteroid->setRadius(radius);
+	// radius for CommonFunctions
+	_radius = radius;
+	// set radius
+	body->setRadius(radius);
 	// set spawn position
-	asteroid->setPosition(-1,-1);
+	body->setPosition(-1,-1);
 	// set colour of asteroids
-	asteroid->setFillColor(sf::Color::White);
+	body->setFillColor(sf::Color::White);
 	// set centre of asteroid
-	asteroid->setOrigin(radius/2, radius/2);
+	body->setOrigin(radius/2, radius/2);
+	// make 'alive' false meaning it hasnt been spawn yet
 	alive = false;
 	// if you don't seed the random number generator, everytime the game is run
 	// we will get the same asteroid sequence
@@ -45,7 +49,7 @@ void Asteroid::spawn(sf::RenderWindow* window) {
 			y_spawn_coord = 0;
 			// cout << "x axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
 			// set the spawn coords
-			asteroid->setPosition(x_spawn_coord, y_spawn_coord);
+			body->setPosition(x_spawn_coord, y_spawn_coord);
 			// std::cout << "spawned @ (" << rand_x << "," << axis << ")" << std::endl;
 		break;
 		// case 1: spawns on the y-axis
@@ -56,11 +60,11 @@ void Asteroid::spawn(sf::RenderWindow* window) {
 			x_spawn_coord = 0;
 			// cout << "y axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
 			// set the spawn coords
-			asteroid->setPosition(x_spawn_coord, y_spawn_coord);
+			body->setPosition(x_spawn_coord, y_spawn_coord);
 			// std::cout << "spawned @ (" << axis << "," << rand_y << ")" << std::endl;
 		break;
 	}
-	alive = true;
+	this->alive = true;
 }
 
 void Asteroid::draw(sf::RenderWindow* window) {
@@ -68,8 +72,8 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	if (this->alive) {
 		// setting 
 		// asteroid->move(cosine_angle/20, sine_angle/20);
-		asteroid->move(cos(angle)/20, sin(angle)/20);
-		window->draw(*asteroid);
+		body->move(cos(angle)/20, sin(angle)/20);
+		window->draw(*body);
 	
 		// WINDOW WRAPPING
 		// new x-coord (output x)
@@ -77,36 +81,26 @@ void Asteroid::draw(sf::RenderWindow* window) {
 		// new y-coord (output y)
 		float new_y;
 		// set output x to current x position
-		new_x = asteroid->getPosition().x;
+		new_x = body->getPosition().x;
 		// set output y to current y position
-		new_y = asteroid->getPosition().y;
+		new_y = body->getPosition().y;
 		// if x-coord < 0, set the new x-coord ox to current x-coord + window size
 		// i.e. moves from left side of window to right side of window
-		if (asteroid->getPosition().x <= 0.0f) {new_x = asteroid->getPosition().x + (float)(window->getSize().x);}
+		if (body->getPosition().x <= 0.0f) {new_x = body->getPosition().x + (float)(window->getSize().x);}
 		// if x-coord >= size of window, set the new x-coord ox to the current x-coord - window size
 		// i.e. move from right side of window to left side of window
-		if (asteroid->getPosition().x >= (float)window->getSize().x) {new_x = asteroid->getPosition().x - (float)(window->getSize().x);}
+		if (body->getPosition().x >= (float)window->getSize().x) {new_x = body->getPosition().x - (float)(window->getSize().x);}
 		// if y-coord < 0, set the new y-coord oy to current y-coord + window size
 		// i.e. move from top of window to bottom of window
-		if (asteroid->getPosition().y <= 0.0f) {new_y = asteroid->getPosition().y + (float)(window->getSize().y);}
+		if (body->getPosition().y <= 0.0f) {new_y = body->getPosition().y + (float)(window->getSize().y);}
 		// if y-coord is >= window size, set the new y-coord oy to the current y-coord - window size
 		// i.e move from bottom of window to top of window
-		if (asteroid->getPosition().y >= (float)window->getSize().y) {new_y = asteroid->getPosition().y - (float)(window->getSize().y);}
+		if (body->getPosition().y >= (float)window->getSize().y) {new_y = body->getPosition().y - (float)(window->getSize().y);}
 		// give the new ox and oy to the asteroid position
-		asteroid->setPosition(new_x,new_y);
+		body->setPosition(new_x,new_y);
 	}
 }
 
-int Asteroid::get_radius() {return radius;}
-
-int Asteroid::get_current_x() {return asteroid->getPosition().x;}
-
-int Asteroid::get_current_y() {return asteroid->getPosition().y;}
-
 Asteroid::~Asteroid() {
-	
+	delete body;
 }
-
-
-/* CHANGE SCORE TO LIVES. WHEN SHIP IS HIT BY ANYTHING, THE LIVES GOES DOWN BY 1 AND THE GAME STOPS. PRESS KEY TO RESPAWN ASTEROIDS
-AND START GAMING AGAIN. WHEN LIVES == 0, GAME OVER, CLOSE WINDOW. */

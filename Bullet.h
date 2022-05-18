@@ -2,20 +2,17 @@
 #define BULLET_H
 
 #include <SFML/Graphics.hpp>
+#include "CommonFunctions.h"
+#include <cmath>
 
-class Bullet {
+class Bullet : public CommonFunctions {
 	private:
-		sf::CircleShape* bullet;
-		int radius;
+		// int radius;
 		// data memeber to tell if bullet is fired or not
 		bool fired;
 	public:
 		// constructor:
 		Bullet();
-		// drawing bullet
-		void draw(sf::RenderWindow* window);
-		// set position
-		void setPosition(sf::Vector2f position);
 		// move bullet
 		void move();
 		// check if bullet is fired
