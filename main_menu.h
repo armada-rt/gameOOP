@@ -1,5 +1,5 @@
-# include <sfml/Graphics.hpp>
-# include <iostream>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -16,7 +16,7 @@ class main_menu
 
     int main_menuPressed()
     {
-        return main_menuPressed;
+        return main_menuPressed();
     }
     ~main_menu();
 
