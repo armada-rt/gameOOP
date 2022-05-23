@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 CommonFunctions: CommonFunctions.cpp
 	g++ -I C://SFML-2.5.1/include CommonFunctions.cpp -o CommonFunctions.exe -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 Bullet: Bullet.cpp

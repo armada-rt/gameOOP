@@ -2,12 +2,11 @@
 #define ASTEROID_H
 
 #include <SFML/Graphics.hpp>
-#include "CommonFunctions.h"
+#include "Entities.h"
 using namespace sf;
 using namespace std;
 
-// class for the game
-class Asteroid : public CommonFunctions {
+class Asteroid : public Entities {
 	private:
 		// bool variable to keep track of whether the asteroid is "dead" or "alive"
 		bool alive;

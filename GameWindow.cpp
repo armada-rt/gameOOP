@@ -2,7 +2,7 @@
 #include "GameWindow.h"
 #include "Ship.h"
 #include "Asteroid.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <string>
 #include <iostream>
 using namespace sf;
@@ -18,7 +18,6 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	this->_magSize = magSize;
 	// for lives
 	_lives = 3.0;
-	_score = 0;
 	// having text for live count
 	if (!font.loadFromFile("./font01.ttf")) {
 		std::cout << "Font not found\n";
@@ -74,28 +73,35 @@ void GameWindow::run() {
 	while (window->isOpen()) {
 		// if window is open...
 		Event e;
+		// SHIP MOVEMENT:
+		if (Keyboard::isKeyPressed(Keyboard::W)) {
+			// move up
+			ship->move_up();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S)) {
+			// move down
+			ship->move_down();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::A)) {
+			// move left
+			ship->move_left();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D)) {
+			// move right
+			ship->move_right();
+		}
+		// spawn asteroids
+		if (spawn == false) {
+			spawn = true;
+			for (int i = 0; i < _numAsteroids; i++) {
+				asteroid[i].spawn(window);
+			}
+		}
 		// event loop
 		while (window->pollEvent(e)) {
 			// check if event of type Closed, then close the window
 			if (e.type == Event::Closed) {
 				window->close();
-			}
-			// SHIP MOVEMENT:
-			if (Keyboard::isKeyPressed(Keyboard::W)) {
-				// move up
-				ship->move_up();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::S)) {
-				// move down
-				ship->move_down();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::A)) {
-				// move left
-				ship->move_left();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::D)) {
-				// move right
-				ship->move_right();
 			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {
@@ -104,12 +110,6 @@ void GameWindow::run() {
 			// reloading
 			if (Mouse::isButtonPressed(Mouse::Right)) {
 				ship->reload();
-			}
-			// spawn asteroids
-			if (Keyboard::isKeyPressed(Keyboard::P)) {
-				for (int i = 0; i < _numAsteroids; i++) {
-					asteroid[i].spawn(window);
-				}
 			}
 		}
 		// clear

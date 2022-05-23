@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <string>
 #include <cmath>
 using namespace sf;

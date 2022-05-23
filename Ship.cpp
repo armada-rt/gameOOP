@@ -17,7 +17,7 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// make array of bullets
 	mag = new Bullet[magSize];
 	// setting travel speed
-	speed = 2;
+	speed = 0.1;
 	// _radius for collision
 	_radius = radius;
 }
@@ -100,6 +100,8 @@ void Ship::reload() {
 		}
 	}
 }
+
+/* int countBulletsUsed to limit when you can reload. only allow reload to be used when the countBulletUsed = magsize */
 
 bool Ship::collision(int target_x, int target_y, int target_radius) {
 	// make "hit" false meaning not collision

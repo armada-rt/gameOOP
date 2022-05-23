@@ -14,7 +14,7 @@ int return_x(Vector2i &list){
 int return_y(Vector2i &list){
     return list.y;
 }
-/*
+
 int main() {
     sf::Vector2i list(4, 7);
 
@@ -23,4 +23,3 @@ int main() {
 
     return (0);
 }
-*/

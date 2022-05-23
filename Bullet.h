@@ -2,23 +2,24 @@
 #define BULLET_H
 
 #include <SFML/Graphics.hpp>
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <cmath>
 
-class Bullet : public CommonFunctions {
+class Bullet : public Entities {
 	private:
 		// data memeber to tell if bullet is fired or not
 		bool fired;
 	public:
-		// constructor:
+		// constructor
 		Bullet();
-		// move bullet
+		// void function returning nothing and move bullet by a given offset
 		void move();
-		// check if bullet is fired
+		// retruns boolean varibale 'fired' = true since the bullet has now being used
 		bool isFired();
-		// reload
+		// void function returning nothing and simply makes 'fired' = false so that the bullet may be used again
 		void reload();
-		// use bullet
+		/* void function returning nothing. Sets the position to the position at which the body is at time of
+		execution and make 'fired' = true since the bullet has no been used */
 		void use(sf::Vector2f position);
 		// destructor
 		~Bullet();

@@ -1,28 +1,28 @@
 #include <SFML/Graphics.hpp>
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <cmath>
 
-void CommonFunctions::draw(sf::RenderWindow* window) {
+void Entities::draw(sf::RenderWindow* window) {
 	window->draw(*body);
 }
 
-int CommonFunctions::get_current_x() {
+int Entities::get_current_x() {
 	return body->getPosition().x;
 }
 
-int CommonFunctions::get_current_y() {
+int Entities::get_current_y() {
 	return body->getPosition().y;
 }
 
-int CommonFunctions::get_radius() {
+int Entities::get_radius() {
 	return _radius;
 }
 
-void CommonFunctions::set_position(sf::Vector2f position) {
+void Entities::set_position(sf::Vector2f position) {
 	body->setPosition(position);
 }
 
-bool CommonFunctions::collision(int target_x, int target_y, int target_radius) {
+bool Entities::collision(int target_x, int target_y, int target_radius) {
 	// make "hit" false meaning no collision
 	bool hit = false;
 	// set x to the current x coord

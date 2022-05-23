@@ -3,14 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 
-class Ship : public CommonFunctions {
+class Ship : public Entities {
 	private:
 		// array of bullets
 		Bullet* mag;
 		int magSize;
-		int speed;
+		float speed;
 	public:
 		// constructor: builds the ship
 		Ship(int radius, int x, int y, int aMagSize);

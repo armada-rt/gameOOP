@@ -1,13 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "Asteroid.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <random>
 #include <time.h>
 
 Asteroid::Asteroid() {
 	body = new sf::CircleShape();
 	radius = 6;
-	// radius for CommonFunctions
+	// radius for Entities
 	_radius = radius;
 	// set radius
 	body->setRadius(radius);
