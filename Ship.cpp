@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
+#include "unistd.h"
 
 Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// create circle shape for the ship
@@ -17,11 +18,7 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// make array of bullets
 	mag = new Bullet[magSize];
 	// setting travel speed
-<<<<<<< HEAD
-	speed = 1;
-=======
-	speed = 0.1;
->>>>>>> 2df58169f004c6a8cd53cce6219c4d7dea5d3ba2
+	speed = 0.5;
 	// _radius for collision
 	_radius = radius;
 	// sets intial bullets used to 0
@@ -86,11 +83,11 @@ void Ship::move_right() {
  	body->move(speed, 0);
 }
 
-void Ship::fire() {
+void Ship::fire(sf::Vector2f mousePos) {
 	for (int i = 0; i < magSize; i++) {
 		// if first bullet is not fired, then use that one
 		if (!mag[i].isFired()) {
-			mag[i].use(body->getPosition());
+			mag[i].use(body->getPosition(),mousePos);
 			// keeps track of how many bullets have been used
 			countBulletsUsed++;
 			break;

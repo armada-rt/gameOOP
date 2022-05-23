@@ -1,7 +1,7 @@
 #include "GameWindow.h"
 #include "Ship.h"
 #include "Asteroid.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -74,11 +74,9 @@ void GameWindow::UpdateMousePositions() {
 	//Sets the value of mouse position according to the mouse's window location
     this->mousePosWindow = Mouse::getPosition(*this->window);
     this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
-
-	ship->get_current_x();
-	float distance = 0.0; 
-
 }
+
+Vector2f GameWindow::mousePos() {	return mousePosView;	}
 
 // function to run the loop
 void GameWindow::run() {
@@ -116,28 +114,30 @@ void GameWindow::run() {
 
 		while (window->pollEvent(e)) {
 			// check if event of type Closed, then close the window
-		// spawn asteroids
-		if (spawn == false) {
-			spawn = true;
-			for (int i = 0; i < _numAsteroids; i++) {
-				asteroid[i].spawn(window);
+			// spawn asteroids
+			if (spawn == false) {
+				spawn = true;
+				for (int i = 0; i < _numAsteroids; i++) {
+					asteroid[i].spawn(window);
+				}
 			}
-		}
-		// event loop
-		while (window->pollEvent(e)) {
+
+			//		Main events loops
+
 			// check if event of type Closed, then close the window
 			if (e.type == Event::Closed) {
 				window->close();
 			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {
-				ship->fire();
+				ship->fire(mousePos());
 			}
 			// reloading
 			if (Mouse::isButtonPressed(Mouse::Right)) {
 				ship->reload();
 			}
 		}
+
 		// clear
 		window->clear();
 		check_lives();
@@ -148,6 +148,8 @@ void GameWindow::run() {
 		draw_frame();
 		// display
 		window->display();
+
+		
 	}
 }
 

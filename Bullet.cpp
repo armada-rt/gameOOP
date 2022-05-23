@@ -27,8 +27,8 @@ Bullet::Bullet() {
 }
 
 void Bullet::move() {
-	// offsets x value by 0.5 every time the function is called
-	body->move(0.35,0);
+	// travels a distance of 1 in provided direction (using direction vector) every time the function is called
+	body->move(1*fire_dir.x,1*fire_dir.y);
 }
 
 bool Bullet::isFired() {return fired;}
@@ -38,11 +38,21 @@ void Bullet::reload() {
 	fired = false;
 }
 
-void Bullet::use(sf::Vector2f position) {
+void Bullet::use(sf::Vector2f shipPos,sf::Vector2f mousePos) {
 	// set position to the position of the player
-	body->setPosition(position);
+	body->setPosition(shipPos);
 	// changes to true since the bullet is now fired
 	fired = true;
+
+	// calculates distance between mousePos and shipPos
+	float dist_x = mousePos.x - shipPos.x;
+	float dist_y = mousePos.y - shipPos.y;
+	float distance = sqrt(dist_x*dist_x + dist_y*dist_y);
+	
+	// normalising 
+	fire_dir.x = dist_x/distance;
+	fire_dir.y = dist_y/distance;
+
 }
 
 Bullet::~Bullet() {

@@ -20,15 +20,12 @@ class GameWindow {
 		int _numAsteroids;
 		// number of lives (... that the player has)
 		float _lives;
-<<<<<<< HEAD
+		// to check if asteroids have been spawned yet or not
+		bool spawn = false;
 
 		Vector2i mousePosWindow;
 		Vector2f mousePosView;
 
-=======
-		// to check if asteroids have been spawned yet or not
-		bool spawn = false;
->>>>>>> 2df58169f004c6a8cd53cce6219c4d7dea5d3ba2
 		// things for text for live count
 		sf::Text info;
 		sf::Font font;
@@ -45,6 +42,7 @@ class GameWindow {
 
 		
 		void UpdateMousePositions();
+		Vector2f mousePos();
 		
 		// destructor
 		~GameWindow();

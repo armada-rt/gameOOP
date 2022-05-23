@@ -26,7 +26,7 @@ class Ship : public Entities {
 		// moving ship right by given offset, returns nothing
 		void move_right();
 		// firing bullets, giving the bullet the players position, and returns nothing
-		void fire();
+		void fire(sf::Vector2f mousePos);
 		// reloading funtion, returning nothing
 		void reload();
 		// collision detection, returning boolean variable to check if coolission has occured
