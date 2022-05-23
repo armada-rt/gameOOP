@@ -74,29 +74,31 @@ void GameWindow::run() {
 	while (window->isOpen()) {
 		// if window is open...
 		Event e;
-		// event loop
+		// Event loop
+		// Movement Loops
+		if (e.type == Event::Closed) {
+			window->close();
+		}
+		// moving the ship:
+		if (Keyboard::isKeyPressed(Keyboard::W)) {
+			// move up
+			ship->move_up();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S)) {
+			// move down
+			ship->move_down();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::A)) {
+			// move left
+			ship->move_left();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D)) {
+			// move right
+			ship->move_right();
+		}
+
 		while (window->pollEvent(e)) {
 			// check if event of type Closed, then close the window
-			if (e.type == Event::Closed) {
-				window->close();
-			}
-			// moving the ship:
-			if (Keyboard::isKeyPressed(Keyboard::W)) {
-				// move up
-				ship->move_up();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::S)) {
-				// move down
-				ship->move_down();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::A)) {
-				// move left
-				ship->move_left();
-			}
-			if (Keyboard::isKeyPressed(Keyboard::D)) {
-				// move right
-				ship->move_right();
-			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {
 				ship->fire();

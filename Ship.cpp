@@ -17,7 +17,7 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// make array of bullets
 	mag = new Bullet[magSize];
 	// setting travel speed
-	speed = 2;
+	speed = 1;
 	// _radius for collision
 	_radius = radius;
 }
