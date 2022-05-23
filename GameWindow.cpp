@@ -96,6 +96,7 @@ void GameWindow::run() {
 			window->close();
 		}
 		// moving the ship:
+		// SHIP MOVEMENT:
 		if (Keyboard::isKeyPressed(Keyboard::W)) {
 			// move up
 			ship->move_up();
@@ -115,6 +116,19 @@ void GameWindow::run() {
 
 		while (window->pollEvent(e)) {
 			// check if event of type Closed, then close the window
+		// spawn asteroids
+		if (spawn == false) {
+			spawn = true;
+			for (int i = 0; i < _numAsteroids; i++) {
+				asteroid[i].spawn(window);
+			}
+		}
+		// event loop
+		while (window->pollEvent(e)) {
+			// check if event of type Closed, then close the window
+			if (e.type == Event::Closed) {
+				window->close();
+			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {
 				ship->fire();
@@ -122,12 +136,6 @@ void GameWindow::run() {
 			// reloading
 			if (Mouse::isButtonPressed(Mouse::Right)) {
 				ship->reload();
-			}
-			// spawn asteroids
-			if (Keyboard::isKeyPressed(Keyboard::P)) {
-				for (int i = 0; i < _numAsteroids; i++) {
-					asteroid[i].spawn(window);
-				}
 			}
 		}
 		// clear

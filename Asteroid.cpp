@@ -1,13 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "Asteroid.h"
-#include "CommonFunctions.h"
+#include "Entities.h"
 #include <random>
 #include <time.h>
 
 Asteroid::Asteroid() {
 	body = new sf::CircleShape();
 	radius = 6;
-	// radius for CommonFunctions
+	// radius for Entities
 	_radius = radius;
 	// set radius
 	body->setRadius(radius);
@@ -19,17 +19,13 @@ Asteroid::Asteroid() {
 	body->setOrigin(radius/2, radius/2);
 	// make 'alive' false meaning it hasnt been spawn yet
 	alive = false;
-	// if you don't seed the random number generator, everytime the game is run
-	// we will get the same asteroid sequence
+	// if you don't seed the random number generator, everytime the game is run we will get the same asteroid sequence
 	srand(time(0));
 }
 
 void Asteroid::direction() {
 	// generate number betweeen 0 and 1 and multiply by 2Pi
 	angle = 2*M_PI * ((float) rand() / RAND_MAX);
-	// get values of cosine and sine
-	// cosine_angle = cos(angle);
-	// sine_angle = sin(angle);
 }
 
 bool Asteroid::is_Alive() {return alive;}
@@ -47,10 +43,8 @@ void Asteroid::spawn(sf::RenderWindow* window) {
 			x_spawn_coord = (float)rand() / (float)(RAND_MAX/(window->getSize().x));
 			// set y to 0 since x-axis spawn
 			y_spawn_coord = 0;
-			// cout << "x axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
 			// set the spawn coords
 			body->setPosition(x_spawn_coord, y_spawn_coord);
-			// std::cout << "spawned @ (" << rand_x << "," << axis << ")" << std::endl;
 		break;
 		// case 1: spawns on the y-axis
 		case 1:
@@ -58,10 +52,8 @@ void Asteroid::spawn(sf::RenderWindow* window) {
 			y_spawn_coord = (float)rand() / (float)(RAND_MAX/(window->getSize().x));
 			// set x to 0 since y-axis spawn
 			x_spawn_coord = 0;
-			// cout << "y axis spawn" << x_spawn_coord << " " << y_spawn_coord << endl;
 			// set the spawn coords
 			body->setPosition(x_spawn_coord, y_spawn_coord);
-			// std::cout << "spawned @ (" << axis << "," << rand_y << ")" << std::endl;
 		break;
 	}
 	this->alive = true;
@@ -71,7 +63,6 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
 		// setting 
-		// asteroid->move(cosine_angle/20, sine_angle/20);
 		body->move(cos(angle)/20, sin(angle)/20);
 		window->draw(*body);
 	
@@ -84,17 +75,17 @@ void Asteroid::draw(sf::RenderWindow* window) {
 		new_x = body->getPosition().x;
 		// set output y to current y position
 		new_y = body->getPosition().y;
-		// if x-coord < 0, set the new x-coord ox to current x-coord + window size
-		// i.e. moves from left side of window to right side of window
+		/* if x-coord < 0, set the new x-coord ox to current x-coord + window size
+		i.e. moves from left side of window to right side of window */
 		if (body->getPosition().x <= 0.0f) {new_x = body->getPosition().x + (float)(window->getSize().x);}
-		// if x-coord >= size of window, set the new x-coord ox to the current x-coord - window size
-		// i.e. move from right side of window to left side of window
+		/* if x-coord >= size of window, set the new x-coord ox to the current x-coord - window size
+		i.e. move from right side of window to left side of window */
 		if (body->getPosition().x >= (float)window->getSize().x) {new_x = body->getPosition().x - (float)(window->getSize().x);}
-		// if y-coord < 0, set the new y-coord oy to current y-coord + window size
-		// i.e. move from top of window to bottom of window
+		/* if y-coord < 0, set the new y-coord oy to current y-coord + window size
+		i.e. move from top of window to bottom of window */
 		if (body->getPosition().y <= 0.0f) {new_y = body->getPosition().y + (float)(window->getSize().y);}
-		// if y-coord is >= window size, set the new y-coord oy to the current y-coord - window size
-		// i.e move from bottom of window to top of window
+		/* if y-coord is >= window size, set the new y-coord oy to the current y-coord - window size
+		i.e move from bottom of window to top of window */
 		if (body->getPosition().y >= (float)window->getSize().y) {new_y = body->getPosition().y - (float)(window->getSize().y);}
 		// give the new ox and oy to the asteroid position
 		body->setPosition(new_x,new_y);
