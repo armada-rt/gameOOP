@@ -110,8 +110,6 @@ void Ship::reload() {
 	}
 }
 
-/* int countBulletsUsed to limit when you can reload. only allow reload to be used when the countBulletUsed = magsize */
-
 bool Ship::collision(int target_x, int target_y, int target_radius) {
 	// make "hit" false meaning not collision
 	bool hit = false;
