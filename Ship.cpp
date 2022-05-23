@@ -20,6 +20,8 @@ Ship::Ship(int radius, int x, int y, int aMagSize) {
 	speed = 0.1;
 	// _radius for collision
 	_radius = radius;
+	// sets intial bullets used to 0
+	countBulletsUsed = 0;
 }
 
 void Ship::draw(sf::RenderWindow* window) {
@@ -85,18 +87,25 @@ void Ship::fire() {
 		// if first bullet is not fired, then use that one
 		if (!mag[i].isFired()) {
 			mag[i].use(body->getPosition());
+			// keeps track of how many bullets have been used
+			countBulletsUsed++;
 			break;
 		}
 	}
 }
 
 void Ship::reload() {
-	// iterating over all the bullets
-	for (int i = 0; i < magSize; i++) {
-		// if bullet is fired
-		if (mag[i].isFired()) {
-			// call reload on it
-			mag[i].reload();
+	// only if you have used all the bullets can you reloads
+	if (countBulletsUsed == magSize) {
+		// reset count of bullets used since now none of them have been used
+		countBulletsUsed = 0;
+		// iterating over all the bullets
+		for (int i = 0; i < magSize; i++) {
+			// if bullet is fired
+			if (mag[i].isFired()) {
+				// call reload on it
+				mag[i].reload();
+			}
 		}
 	}
 }

@@ -11,24 +11,25 @@ class Ship : public Entities {
 		Bullet* mag;
 		int magSize;
 		float speed;
+		int countBulletsUsed;
 	public:
-		// constructor: builds the ship
+		// constructor: builds the ship with certain radius, intial spawn position an amount of bullets
 		Ship(int radius, int x, int y, int aMagSize);
-		// function to draw the ship
+		// void function returning nothing to draw the ship, taking care of window wrapping as well as bullet firing
 		void draw(sf::RenderWindow* window);
-		// moving ship up
+		// moving ship up by given offset, returns nothing
 		void move_up();
-		// moving ship down
+		// moving ship down by given offset, returns nothing
 		void move_down();
-		// moving ship left
+		// moving ship left by given offset, retuns nothing
 		void move_left();
-		// moving ship right
+		// moving ship right by given offset, returns nothing
 		void move_right();
-		// firing bullets
+		// firing bullets, giving the bullet the players position, and returns nothing
 		void fire();
-		// reload
+		// reloading funtion, returning nothing
 		void reload();
-		// collision
+		// collision detection, returning boolean variable to check if coolission has occured
 		bool collision(int target_x, int target_y, int target_radius);
 		~Ship();
 };

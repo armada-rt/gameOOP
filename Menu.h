@@ -9,14 +9,20 @@ using namespace std;
 
 class Menu {
 	private:
+		// string variable for the header of the menu
 		std::string header;
+		// vector of string for the options given, play, controls, quit
 		std::vector<std::string> options;
+		// int for navigating around the menu
 		int choice;
 	public:
-		Menu (std::string header, const std::vector<std::string> &options);
+		// constructor taking the header/name and list of options
+		Menu(std::string header, const std::vector<std::string> &options);
+		// void function returning nothign and showing the menu, i.e. the options play, controls, quit
 		void present();
+		// void fucntion returning nothing and performing various tasks depending on what the user inputs
 		void Choice();
-		int getChoice();
+		// void function returning nothing that prints the controls when called
 		void controls();
 		~Menu();
 };
