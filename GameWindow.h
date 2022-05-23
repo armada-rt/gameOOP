@@ -21,6 +21,7 @@ class GameWindow {
 		int _numAsteroids;
 		// number of lives
 		float _lives;
+		float _score;
 		// things for text for live count
 		sf::Text info;
 		sf::Font font;

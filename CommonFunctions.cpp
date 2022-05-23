@@ -33,7 +33,7 @@ bool CommonFunctions::collision(int target_x, int target_y, int target_radius) {
 	float distance = sqrt((x - target_x)*(x - target_x) + (y - target_y)*(y - target_y));
 	// if distance is less than the sum of the radii of the two objects being checked ...
 	if (distance < (_radius + target_radius)) {
-		// "hit" si true meaning they collided
+		// ... "hit" is true meaning they collided
 		hit = true;
 	}
 	return hit;

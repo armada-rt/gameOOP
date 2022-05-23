@@ -7,7 +7,6 @@
 
 class Bullet : public CommonFunctions {
 	private:
-		// int radius;
 		// data memeber to tell if bullet is fired or not
 		bool fired;
 	public:

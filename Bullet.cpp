@@ -27,9 +27,6 @@ Bullet::Bullet() {
 }
 
 void Bullet::move() {
-	// get position of mouse
-	// static getPosition(const Window &relativeTo);
-	// sf::Mouse::getPosition(window);
 	// offsets x value by 0.5 every time the function is called
 	body->move(0.35,0);
 }

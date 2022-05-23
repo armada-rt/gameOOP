@@ -7,7 +7,6 @@
 #include <iostream>
 using namespace sf;
 
-
 GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	// create an object of RenderWindow and put its address in the variable/data member
 	window = new sf::RenderWindow(sf::VideoMode(size, size), title);
@@ -19,6 +18,7 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	this->_magSize = magSize;
 	// for lives
 	_lives = 3.0;
+	_score = 0;
 	// having text for live count
 	if (!font.loadFromFile("./font01.ttf")) {
 		std::cout << "Font not found\n";
@@ -80,7 +80,7 @@ void GameWindow::run() {
 			if (e.type == Event::Closed) {
 				window->close();
 			}
-			// moving the ship:
+			// SHIP MOVEMENT:
 			if (Keyboard::isKeyPressed(Keyboard::W)) {
 				// move up
 				ship->move_up();

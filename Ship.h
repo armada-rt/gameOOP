@@ -7,7 +7,6 @@
 
 class Ship : public CommonFunctions {
 	private:
-		// sf::CircleShape* shipBody;
 		// array of bullets
 		Bullet* mag;
 		int magSize;
