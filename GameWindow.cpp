@@ -1,12 +1,14 @@
-#include <SFML/Graphics.hpp>
 #include "GameWindow.h"
 #include "Ship.h"
 #include "Asteroid.h"
 #include "CommonFunctions.h"
+
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
-using namespace sf;
 
+using namespace sf;
+using namespace std;
 
 GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	// create an object of RenderWindow and put its address in the variable/data member
@@ -68,6 +70,16 @@ void GameWindow::check_lives() {
 	}
 }
 
+void GameWindow::UpdateMousePositions() {
+	//Sets the value of mouse position according to the mouse's window location
+    this->mousePosWindow = Mouse::getPosition(*this->window);
+    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+
+	ship->get_current_x();
+	float distance = 0.0; 
+
+}
+
 // function to run the loop
 void GameWindow::run() {
 	// check the window is open
@@ -75,6 +87,10 @@ void GameWindow::run() {
 		// if window is open...
 		Event e;
 		// Event loop
+
+		//Updating Mouse Position
+		UpdateMousePositions();
+
 		// Movement Loops
 		if (e.type == Event::Closed) {
 			window->close();

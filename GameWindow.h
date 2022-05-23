@@ -21,6 +21,10 @@ class GameWindow {
 		int _numAsteroids;
 		// number of lives
 		float _lives;
+
+		Vector2i mousePosWindow;
+		Vector2f mousePosView;
+
 		// things for text for live count
 		sf::Text info;
 		sf::Font font;
@@ -32,6 +36,10 @@ class GameWindow {
 		void check_lives();
 		// function to run the loop
 		void run();
+
+		
+		void UpdateMousePositions();
+		
 		// destructor
 		~GameWindow();
 };
