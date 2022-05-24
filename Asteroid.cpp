@@ -63,7 +63,7 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
 		// setting 
-		body->move(cos(angle)/20, sin(angle)/20);
+		body->move(cos(angle)/15, sin(angle)/15);
 		window->draw(*body);
 	
 		// WINDOW WRAPPING
