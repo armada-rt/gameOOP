@@ -9,6 +9,7 @@ class Bullet : public Entities {
 	private:
 		// data memeber to tell if bullet is fired or not
 		bool fired;
+		sf::Vector2f fire_dir;
 	public:
 		// constructor
 		Bullet();
@@ -20,7 +21,7 @@ class Bullet : public Entities {
 		void reload();
 		/* void function returning nothing. Sets the position to the position at which the body is at time of
 		execution and make 'fired' = true since the bullet has no been used */
-		void use(sf::Vector2f position);
+		void use(sf::Vector2f shipPosition, sf::Vector2f mousePosition);
 		// destructor
 		~Bullet();
 };

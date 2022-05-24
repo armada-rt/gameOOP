@@ -22,6 +22,9 @@ class GameWindow {
 		float _lives;
 		// to check if asteroids have been spawned yet or not
 		bool spawn = false;
+		// variable for the position of the mouse relative to the window
+		Vector2i mousePosWindow;
+		Vector2f mousePosView;
 		// things for text for live count
 		sf::Text info;
 		sf::Font font;
@@ -35,6 +38,12 @@ class GameWindow {
 		void check_lives();
 		// function to run the loop while returning nothing
 		void run();
+		/* function returning nothing, updates the mouse position setting the mouse position according
+		to the position in the window */
+		void UpdateMousePositions();
+		// function to return the position of the mouse as a float vector
+		Vector2f mousePos();
+
 		// destructor
 		~GameWindow();
 };

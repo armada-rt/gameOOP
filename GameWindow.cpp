@@ -73,6 +73,8 @@ void GameWindow::run() {
 	while (window->isOpen()) {
 		// if window is open...
 		Event e;
+		// updating mouse position
+		UpdateMousePositions();
 		// SHIP MOVEMENT:
 		if (Keyboard::isKeyPressed(Keyboard::W)) {
 			// move up
@@ -105,7 +107,7 @@ void GameWindow::run() {
 			}
 			// shooting bullet
 			if (Mouse::isButtonPressed(Mouse::Left)) {
-				ship->fire();
+				ship->fire(mousePos());
 			}
 			// reloading
 			if (Mouse::isButtonPressed(Mouse::Right)) {
@@ -124,6 +126,14 @@ void GameWindow::run() {
 		window->display();
 	}
 }
+
+void GameWindow::UpdateMousePositions() {
+	// Sets the value of mouse position according to the mouse's window location
+    this->mousePosWindow = Mouse::getPosition(*this->window);
+    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+}
+
+Vector2f GameWindow::mousePos() {return mousePosView;}
 
 GameWindow::~GameWindow() {
 	delete ship;

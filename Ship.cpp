@@ -82,11 +82,12 @@ void Ship::move_right() {
  	body->move(speed, 0);
 }
 
-void Ship::fire() {
+void Ship::fire(sf::Vector2f mousePosition) {
 	for (int i = 0; i < magSize; i++) {
 		// if first bullet is not fired, then use that one
 		if (!mag[i].isFired()) {
-			mag[i].use(body->getPosition());
+			// set the position to where the ship is and give it direction towards mouse
+			mag[i].use(body->getPosition(), mousePosition);
 			// keeps track of how many bullets have been used
 			countBulletsUsed++;
 			break;
@@ -125,6 +126,7 @@ bool Ship::collision(int target_x, int target_y, int target_radius) {
 			}
 		}
 	}
+	// returning 'hit' = false if no collision has occured
 	return hit;
 }
 
