@@ -63,7 +63,11 @@ void GameWindow::check_lives() {
 				// increases number of asteroids destroyed by 1
 				countAsteroidsDestroyed++;
 				// ... "kill"/destroy the asteroid
-				asteroid[i].die();
+				if (asteroid[i].getState() != 1) {
+					asteroid[i].die(asteroid[i].getState());
+				} else {
+					asteroid[i].die();
+				}
 			}
 		}
 	}
@@ -121,9 +125,10 @@ void GameWindow::run() {
 		check_lives();
 		// if lives is <= 0 close game
 		if (_lives <= 0) {
+			cout << "GAME OVER" << endl;
 			break;
 		}
-		if (countAsteroidsDestroyed == _numAsteroids) {
+		if (countAsteroidsDestroyed == 3*_numAsteroids) {
 			cout << "CONGRATULATIONS! YOU HAVE WON" << endl;
 			break;
 		}

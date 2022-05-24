@@ -6,7 +6,7 @@
 
 Asteroid::Asteroid() {
 	body = new sf::CircleShape();
-	radius = 6;
+	// radius = 6;
 	// radius for Entities
 	_radius = radius;
 	// set radius
@@ -21,6 +21,9 @@ Asteroid::Asteroid() {
 	alive = false;
 	// if you don't seed the random number generator, everytime the game is run we will get the same asteroid sequence
 	srand(time(0));
+	// Randomises velocities
+	velocity = rand() % 3 + 4;
+
 }
 
 void Asteroid::direction() {
@@ -30,7 +33,18 @@ void Asteroid::direction() {
 
 bool Asteroid::is_Alive() {return alive;}
 
+int Asteroid::getState() {return state;}
+
 void Asteroid::die() {alive = false;}
+
+void Asteroid::die(int inputState) {
+	state = inputState - 1;
+	radius = radius - 10;
+	_radius = radius;
+	body->setRadius(_radius);
+	direction();
+	velocity = velocity + 2;
+}
 
 void Asteroid::spawn(sf::RenderWindow* window) {
 	direction();
@@ -63,7 +77,7 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
 		// setting 
-		body->move(cos(angle)/15, sin(angle)/15);
+		body->move(velocity*cos(angle)/40, velocity*sin(angle)/40);
 		window->draw(*body);
 	
 		// WINDOW WRAPPING
