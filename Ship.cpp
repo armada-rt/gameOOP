@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
 #include "unistd.h"
+#include <iostream>
 
 Ship::Ship(int radius, int x, int y, int aMagSize) {
 	// create circle shape for the ship
@@ -97,7 +98,7 @@ void Ship::fire(sf::Vector2f mousePos) {
 
 void Ship::reload() {
 	// only if you have used all the bullets can you reloads
-	if (countBulletsUsed == magSize) {
+	if (countBulletsUsed >= magSize) {
 		// reset count of bullets used since now none of them have been used
 		countBulletsUsed = 0;
 		// iterating over all the bullets
@@ -122,10 +123,11 @@ bool Ship::collision(int target_x, int target_y, int target_radius) {
 			if (mag[i].collision(target_x, target_y, target_radius)) {
 				// make "hit" true meaning is colliding
 				hit = true;
+				mag[i].reload();
 				return hit;
 			}
 		}
-	}
+	}	
 	return hit;
 }
 

@@ -7,12 +7,11 @@ using namespace sf;
 using namespace std;
 
 Bullet::Bullet() {
-	int radius;
 	// bullet shape made circular
 	body = new sf::CircleShape();
-	// set radius
-	radius = 2.5;
-	// _radius for collision
+
+	// _radius for collision and size
+	int radius = 2.5;
 	_radius = radius;
 	// set radius
 	body->setRadius(radius);

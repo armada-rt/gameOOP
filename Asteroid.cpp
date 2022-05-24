@@ -3,10 +3,18 @@
 #include "Entities.h"
 #include <random>
 #include <time.h>
+#include <iostream>
 
 Asteroid::Asteroid() {
 	body = new sf::CircleShape();
-	radius = 6;
+	
+	// if you don't seed the random number generator, everytime this function is run we will get the same asteroid sequence
+	srand(time(NULL));
+	
+	
+	// Randomises velocities
+	velocity = rand() % 3 + 4;
+
 	// radius for Entities
 	_radius = radius;
 	// set radius
@@ -19,8 +27,7 @@ Asteroid::Asteroid() {
 	body->setOrigin(radius/2, radius/2);
 	// make 'alive' false meaning it hasnt been spawn yet
 	alive = false;
-	// if you don't seed the random number generator, everytime the game is run we will get the same asteroid sequence
-	srand(time(0));
+	
 }
 
 void Asteroid::direction() {
@@ -30,10 +37,24 @@ void Asteroid::direction() {
 
 bool Asteroid::is_Alive() {return alive;}
 
-void Asteroid::die() {alive = false;}
+void Asteroid::die() {
+	if (state > 1) {
+		state = state-1;
+		radius = radius-10;
+		_radius = radius;
+		body->setRadius(radius);
+		direction();
+		velocity = velocity + 2;
+	} else {
+		alive = false;
+	}
+	
+}
 
 void Asteroid::spawn(sf::RenderWindow* window) {
+	//Select random direction
 	direction();
+
 	// random number chosen. 0 or 1. For switch statement below
 	axes_spawn_choice = rand() % 2;
 	switch (axes_spawn_choice) {
@@ -63,7 +84,7 @@ void Asteroid::draw(sf::RenderWindow* window) {
 	// check if alive
 	if (this->alive) {
 		// setting 
-		body->move(cos(angle)/20, sin(angle)/20);
+		body->move(velocity*cos(angle)/20, velocity*sin(angle)/20);
 		window->draw(*body);
 	
 		// WINDOW WRAPPING

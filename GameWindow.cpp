@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace sf;
 using namespace std;
@@ -16,9 +17,17 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	// fill ship pointer with an object
 	ship = new Ship(10,400,400, magSize);
 	// having asteroids
+	
+	// Changing asteroid implementation to be a VECTOR for easy dynamic allocation
 	asteroid = new Asteroid[numAsteroids];
+	
+	//vector<Asteroid> asteroid;
+	//asteroid.resize(numAsteroids);
+	
 	this->_numAsteroids = numAsteroids;
 	this->_magSize = magSize;
+	
+	
 	// for lives
 	_lives = 3.0;
 	// having text for live count
@@ -61,9 +70,7 @@ void GameWindow::check_lives() {
 			}
 			// if asteroid collides with ship
 			if (ship->collision(asteroid[i].get_current_x(), asteroid[i].get_current_y(), asteroid[i].get_radius())) {
-				// if ship bullet hits asteroid, increase lives by 0.2 lives and ...
-				_lives = _lives + 0.2;
-				// ... "kill"/destroy the asteroid
+				// "kill"/destroy the asteroid
 				asteroid[i].die();
 			}
 		}
@@ -116,11 +123,13 @@ void GameWindow::run() {
 			// check if event of type Closed, then close the window
 			// spawn asteroids
 			if (spawn == false) {
+				//Only spawns asteroids once
 				spawn = true;
 				for (int i = 0; i < _numAsteroids; i++) {
 					asteroid[i].spawn(window);
 				}
 			}
+
 
 			//		Main events loops
 

@@ -26,7 +26,7 @@ void Menu::Choice() {
 	// validating input...
 	if (choice == 1) {
 		// ... create the game and run it
-		GameWindow g(800,"ASTEROIDS", 10, 5);
+		GameWindow g(800,"ASTEROIDS", 10, 8);
 		g.run();
 	} else if (choice == 2) {
 		/* ... call various functions to print the controls, show the menu again and get user input
