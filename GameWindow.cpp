@@ -18,6 +18,8 @@ GameWindow::GameWindow(int size, string title, int magSize, int numAsteroids) {
 	this->_magSize = magSize;
 	// for lives
 	_lives = 3.0;
+	// intialising number of asteroids destroyed, obviously to 0
+	countAsteroidsDestroyed = 0;
 	// having text for live count
 	if (!font.loadFromFile("./font01.ttf")) {
 		std::cout << "Font not found\n";
@@ -58,8 +60,8 @@ void GameWindow::check_lives() {
 			}
 			// if asteroid collides with ship
 			if (ship->collision(asteroid[i].get_current_x(), asteroid[i].get_current_y(), asteroid[i].get_radius())) {
-				// if ship bullet hits asteroid, increase lives by 0.2 lives and ...
-				_lives = _lives + 0.2;
+				// increases number of asteroids destroyed by 1
+				countAsteroidsDestroyed++;
 				// ... "kill"/destroy the asteroid
 				asteroid[i].die();
 			}
@@ -119,6 +121,10 @@ void GameWindow::run() {
 		check_lives();
 		// if lives is <= 0 close game
 		if (_lives <= 0) {
+			break;
+		}
+		if (countAsteroidsDestroyed == _numAsteroids) {
+			cout << "CONGRATULATIONS! YOU HAVE WON" << endl;
 			break;
 		}
 		draw_frame();

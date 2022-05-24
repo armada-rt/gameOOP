@@ -25,6 +25,8 @@ class GameWindow {
 		// variable for the position of the mouse relative to the window
 		Vector2i mousePosWindow;
 		Vector2f mousePosView;
+		// count to keep track of how many asteroids have been destroyed
+		int countAsteroidsDestroyed;
 		// things for text for live count
 		sf::Text info;
 		sf::Font font;
