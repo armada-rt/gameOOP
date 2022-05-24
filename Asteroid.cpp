@@ -36,19 +36,19 @@ void Asteroid::direction() {
 }
 
 bool Asteroid::is_Alive() {return alive;}
+int Asteroid::getState() {return state;}
 
 void Asteroid::die() {
-	if (state > 1) {
-		state = state-1;
-		radius = radius-10;
-		_radius = radius;
-		body->setRadius(radius);
-		direction();
-		velocity = velocity + 2;
-	} else {
-		alive = false;
-	}
-	
+	alive = false;
+}
+
+void Asteroid::die(int inputState) {
+	state = inputState-1;
+	radius = radius-10;
+	_radius = radius;
+	body->setRadius(radius);
+	direction();
+	velocity = velocity + 2;
 }
 
 void Asteroid::spawn(sf::RenderWindow* window) {

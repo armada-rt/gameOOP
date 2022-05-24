@@ -17,6 +17,10 @@ class Ship : public Entities {
 		Ship(int radius, int x, int y, int aMagSize);
 		// void function returning nothing to draw the ship, taking care of window wrapping as well as bullet firing
 		void draw(sf::RenderWindow* window);
+		
+		//General movement function
+		//void Ship::move();
+
 		// moving ship up by given offset, returns nothing
 		void move_up();
 		// moving ship down by given offset, returns nothing

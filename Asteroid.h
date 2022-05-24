@@ -30,21 +30,22 @@ class Asteroid : public Entities {
 	public:
 		// constructor
 		Asteroid();
-		// OVERRIDDEN constructor for asteroids spawned due to destruction:
-		Asteroid(int state);
 
 		/* void function returning nothing, calculates a random number between 0 and 2Pi storing it in 'angle' and returns nothing */
 		void direction();
 		// boolean function returns the variable 'alive' as true
 		bool is_Alive();
+		
+		//Returns value of state
+		int getState();
 		// void function returning nothing and making 'alive' as false;
 		void die();
-		
+		//OVERLOADED version of die.
+		void die(int state);
+
 		/* void function returning nothing but choosing a random spawn axis and randomising the necessary coordinates, as well
 		as setting the spawn position of the asteroid */
 		void spawn(sf::RenderWindow* window);
-
-		//OVERRIDEN version 
 
 		/* void function returning nothing, but draws the asteroid and moves it with certain offset depending on 'angle' as well 
 		as controlling the window wrap for all the asteroids */

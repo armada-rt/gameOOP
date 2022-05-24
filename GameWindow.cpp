@@ -71,7 +71,13 @@ void GameWindow::check_lives() {
 			// if asteroid collides with ship
 			if (ship->collision(asteroid[i].get_current_x(), asteroid[i].get_current_y(), asteroid[i].get_radius())) {
 				// "kill"/destroy the asteroid
-				asteroid[i].die();
+				if (asteroid[i].getState() != 1) {
+					asteroid[i].die(asteroid[i].getState());
+				} else {
+					asteroid[i].die();
+				}
+
+
 			}
 		}
 	}
@@ -96,15 +102,16 @@ void GameWindow::run() {
 		//Updating Mouse Position
 		UpdateMousePositions();
 
-		// Movement Loops
-		if (e.type == Event::Closed) {
-			window->close();
-		}
 		// moving the ship:
 		// SHIP MOVEMENT:
+
+		// if (e.type == Event::KeyPressed) {
+		// 	if (Keyboard::isKeyPressed(Keyboard::W)) { ship->move();			}
+		// }
+
 		if (Keyboard::isKeyPressed(Keyboard::W)) {
 			// move up
-			ship->move_up();
+			ship->move_up(); 
 		}
 		if (Keyboard::isKeyPressed(Keyboard::S)) {
 			// move down
@@ -120,7 +127,6 @@ void GameWindow::run() {
 		}
 
 		while (window->pollEvent(e)) {
-			// check if event of type Closed, then close the window
 			// spawn asteroids
 			if (spawn == false) {
 				//Only spawns asteroids once
@@ -129,7 +135,6 @@ void GameWindow::run() {
 					asteroid[i].spawn(window);
 				}
 			}
-
 
 			//		Main events loops
 
