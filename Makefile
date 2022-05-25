@@ -1,5 +1,5 @@
-CommonFunctions: CommonFunctions.cpp
-	g++ -I C://SFML-2.5.1/include CommonFunctions.cpp -o CommonFunctions.exe -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+Entities: Entities.cpp
+	g++ -I C://SFML-2.5.1/include Entities.cpp -o Entities.exe -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 Bullet: Bullet.cpp
 	g++ -I C://SFML-2.5.1/include Bullet.cpp -o Bullet -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 Asteroid: Asteroid.cpp
@@ -10,7 +10,9 @@ GameWindow: GameWindow.cpp
 	g++ -I C://SFML-2.5.1/include GameWindow.cpp -o GameWindow -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 main: main.cpp
 	g++ -I C://SFML-2.5.1/include main.cpp -o main -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
-all: main.cpp GameWindow.cpp Ship.cpp Asteroid.cpp Bullet.cpp CommonFunctions.cpp
+Menu: Menu.cpp
+	g++ Menu.cpp -o Menu
+all: main.cpp Menu.cpp GameWindow.cpp Ship.cpp Asteroid.cpp Bullet.cpp Entities.cpp
 	g++ -I C://SFML-2.5.1/include *.cpp -o game.exe -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 runGame:
 	./game.exe
