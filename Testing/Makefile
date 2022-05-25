@@ -16,11 +16,7 @@ vectorPosition: vectorPosition.cpp
 	g++ -g -Wall -I C://SFML-2.5.1/include vectorPosition.cpp -o vectorPosition -L C://SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 runVectorPosition:
 	./vectorPosition
-ChoiceInval: menuValidation.cpp
-	g++ -g -Wall menuValidation.cpp -o menuInval
-runChoicesInval:
-	./menuInval < menuInvalidChoices.txt
-ChoiceVal: menuValidation.cpp
-	g++ -g -Wall menuValidation.cpp -o menuVal
-runChoicesVal:
-	./menuVal < menuValidChoices.txt
+menuChoices: menuValidation.cpp
+	g++ -g -Wall menuValidation.cpp -o menuChoices
+runMenuChoices:
+	./menuChoices < menuChoices.txt
